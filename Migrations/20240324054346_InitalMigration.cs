@@ -1,12 +1,11 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
 namespace SmallBasket.API.Migrations
 {
     /// <inheritdoc />
-    public partial class initial : Migration
+    public partial class InitalMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -26,6 +25,7 @@ namespace SmallBasket.API.Migrations
                 },
                 constraints: table =>
                 {
+                    table.PrimaryKey("PK_Users", x => x.UserId);
                 });
         }
 

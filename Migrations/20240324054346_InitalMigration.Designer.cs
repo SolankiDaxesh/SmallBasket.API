@@ -12,8 +12,8 @@ using SmallBasket.API.DataAcecss;
 namespace SmallBasket.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20240316125806_initial")]
-    partial class initial
+    [Migration("20240324054346_InitalMigration")]
+    partial class InitalMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -27,6 +27,10 @@ namespace SmallBasket.API.Migrations
 
             modelBuilder.Entity("SmallBasket.API.Entities.User.Users", b =>
                 {
+                    b.Property<Guid>("UserId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
@@ -52,8 +56,7 @@ namespace SmallBasket.API.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uniqueidentifier");
+                    b.HasKey("UserId");
 
                     b.ToTable("Users");
                 });

@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using SmallBasket.API.Model;
 using SmallBasket.API.Repository;
 
@@ -18,9 +16,15 @@ namespace SmallBasket.API.Controllers
         }
 
         [HttpPost("CreateUser")]
-        public async Task<IActionResult> CreateUser(Users_RM user) 
+        public async Task<IActionResult> CreateUser(Users_RM user)
         {
             return Ok(await usersRepository.CreateUser(user));
+        }
+
+        [HttpPost("Login")]
+        public async Task<IActionResult> Login([FromBody] Login_RM login)
+        {
+            return Ok(await usersRepository.Login(login));
         }
     }
 }

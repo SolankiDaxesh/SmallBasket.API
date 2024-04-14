@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using SmallBasket.API.DataAcecss;
 using SmallBasket.API.Entities.User;
 using SmallBasket.API.Model;
@@ -10,6 +10,7 @@ namespace SmallBasket.API.Repository
     public interface IUsersRepository
     {
         Task<Users> CreateUser(Users_RM user);
+        Task<Users> Login(Login_RM login);
     }
     public class UsersRepository : IUsersRepository
     {
@@ -45,6 +46,29 @@ namespace SmallBasket.API.Repository
 
                 throw ex;
             }
+        }
+
+        public async Task<Users> Login(Login_RM login)
+        {
+            try
+            {
+                var user = await context.Users.Where(x => x.Email == login.UserName && x.Password == login.Password).SingleAsync();
+                if (user is null)
+                {
+                    throw new ApplicationException("Invalid Login Credentials!!..");
+                }
+                else
+                {
+                    return user;
+                }
+            }
+            catch
+            {
+
+                throw new ApplicationException("Invalid Login Credentials!!..");
+            }
+
+
         }
     }
 }

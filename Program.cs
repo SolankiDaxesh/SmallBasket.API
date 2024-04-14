@@ -1,4 +1,3 @@
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using SmallBasket.API.DataAcecss;
 using SmallBasket.API.Repository;
@@ -22,7 +21,7 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-//app.UseCors(x => x.AllowCredentials().AllowAnyHeader().AllowAnyOrigin());
+app.UseCors(options => options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
@@ -39,5 +38,6 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+app.UseCors();
 
 app.Run();

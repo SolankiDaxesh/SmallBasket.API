@@ -24,6 +24,10 @@ namespace SmallBasket.API.Migrations
 
             modelBuilder.Entity("SmallBasket.API.Entities.User.Users", b =>
                 {
+                    b.Property<Guid>("UserId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
@@ -49,8 +53,7 @@ namespace SmallBasket.API.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uniqueidentifier");
+                    b.HasKey("UserId");
 
                     b.ToTable("Users");
                 });
